@@ -1,0 +1,61 @@
+﻿<Window x:Class="UsersApp.AuthWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UsersApp"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+
+        mc:Ignorable="d"
+                Title="Users App" Height="450" Width="800">
+
+    <!--Animation-->
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Loaded">
+            <!-- когда сработает анимация (при загрузке окна-->
+            <EventTrigger.Actions>
+                <!-- действия внутри анимации-->
+                <BeginStoryboard>
+                    <!--позволяет начать анимацию-->
+                    <Storyboard TargetProperty ="Width" TargetName ="authButton">
+                        <!-- что меняем и для кого-->
+                        <DoubleAnimation From="0" To="450"
+                                         AutoReverse="True"
+                                         RepeatBehavior="0:0:15"
+                                         Duration="0:0:2">
+                            <!--создание анимации: откуда, куда, маятник 5 сек(если 5 раз, то RepeatBehavior="5x" бесконечно - Forever), 2 сек анимация-->
+                        </DoubleAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Window.Triggers>
+    
+    <Grid Background="#ffdadada">
+        <!--отступы внешн 15 внутр 30 и округление CornerRadius-->
+        <Border MinWidth="400" MaxWidth="550"  Margin="15" Background="White" VerticalAlignment="Center" Padding="30" CornerRadius="20" >
+
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Color="Gray" ShadowDepth="10" />
+            </Border.Effect>
+
+            <StackPanel>
+                <TextBlock Text="Authorization" FontSize="30" FontWeight="Bold" Margin="0 0 0 20" />
+
+                <Grid Margin="0 0 0 20">
+                    <Button HorizontalAlignment="Left" Content="Register" Click="Button_Click_Reg" />
+                    
+                    <Button HorizontalAlignment="Right" Content="Log in" Click="Button_Window_Auth_Click" Style="{StaticResource MaterialDesignFlatButton}" /> 
+                </Grid>
+
+                <TextBox x:Name="textBoxLogin" materialDesign:HintAssist.Hint="Enter login" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                <PasswordBox x:Name="passBox" materialDesign:HintAssist.Hint="Enter password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
+                
+                <Button Content="Sign in" x:Name="authButton" Margin="0 20"  Click="Button_Auth_Click"/>
+            </StackPanel>
+
+        </Border>
+
+
+    </Grid>
+</Window>
